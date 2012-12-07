@@ -24,7 +24,7 @@ class cloudStack
         if ($this->_checkCurl() == false) {
             $this->_curlEnabled = 0;
         } else {
-            $this->_curnEnabled = 1;
+            $this->_curlEnabled = 1;
         }
     }
     
