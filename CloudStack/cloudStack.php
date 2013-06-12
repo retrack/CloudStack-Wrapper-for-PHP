@@ -14,6 +14,7 @@ class cloudStack
     protected $_targetApi = NULL;
     private $_curlEnabled = NULL;
     public $responseType = 'json';
+	public $return_signed_only = false;
     
     public function __construct($targetApi, $apiKey, $secretKey)
     {
@@ -31,7 +32,6 @@ class cloudStack
     /******** Start Custom Methods ********/
     public function execute_command($command, $array = null)
     {
-        echo $this->_curlEnabled;
         if (empty($array)) {
             $array = array();
         }
@@ -435,11 +435,15 @@ class cloudStack
         
         if ($this->_curlEnabled == 0) {
             return '<p>Return: <b>cURL is not enabled;</b> Here is your signed request for testing via browser or other method: <br /><small><a href="' . $request . '">' . $request . '</a></small></p>';
-        } else {
+        } elseif ($this->return_signed_only == true) {
+			return $request;
+		}else {
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $request);
             curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, FALSE);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($curl, CURLOPT_SSLVERSION, 3);
+			curl_setopt($curl, CURLOPT_TIMEOUT,   10);
             $response = curl_exec($curl);
             
             if (curl_errno($curl)) {
