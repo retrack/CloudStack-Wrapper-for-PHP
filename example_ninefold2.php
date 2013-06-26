@@ -14,7 +14,7 @@ $ninefold->return_signed_only = true;
 $ninefold->execute_command('listProjects');
 
 //List All my VMs in Ninefold 2 (Requires you pass projectid)
-$ninefold->execute_command('listVirtualMachines', array('projectid' =>'<yourProjectID>');
+$ninefold->execute_command('listVirtualMachines', array('projectid' =>'<yourProjectID>'));
 
 //Execute Command - The wrapper has a lot of functions already prebuilt, but you can use this to extend it dynamically and let the wrapper handle the signing and execution.
 $ninefold->execute_command('updateVirtualMachine', array('id' => 1));
